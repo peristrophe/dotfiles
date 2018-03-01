@@ -1,0 +1,21 @@
+set noswapfile
+set ruler
+set title
+set wildmenu
+set showcmd
+set smartcase
+set showmatch
+"set expandtab
+"set tabstop=4
+"set shiftwidth=4
+"set smarttab
+"set autoindent
+"set smartindent
+"set whichwrap=b,s,h,l,<,>,[,]
+set hlsearch
+set incsearch
+set number
+set background=dark
+colorscheme desert
+highlight LineNr ctermfg=darkyellow
+syntax on
