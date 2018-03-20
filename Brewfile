@@ -1,22 +1,23 @@
-tap "homebrew/core"
-tap "homebrew/bundle"
+tap "caskroom/cask"
 tap "caskroom/fonts"
 tap "caskroom/versions"
-tap "caskroom/cask"
+tap "homebrew/bundle"
+tap "homebrew/core"
 tap "rcmdnk/file"
 cask "java"
 cask "caskroom/versions/java8"
-brew "readline"
 brew "bash", link: false
 brew "embulk"
 brew "ffmpeg", link: false
 brew "git", link: false
 brew "jq"
+brew "mecab"
+brew "mecab-ipadic"
 brew "mysql", link: false
 brew "nkf"
 brew "nodebrew"
+brew "postgresql"
 brew "pyenv"
-brew "xz"
 brew "r", link: false
 brew "rbenv"
 brew "sqlite"
