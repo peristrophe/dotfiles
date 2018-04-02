@@ -42,7 +42,7 @@ __EOQ__
 function gitcd() {
     # 引数が / で始まらない
     # または ホームディレクトリの path で始まる場合、普通に cd
-    if [[ ! "${1}" =~ "^/.*" || "${1}" =~ "^${HOME}.*" ]]; then
+    if [[ ! ${1} =~ ^/.* || ${1} =~ ^${HOME}.* ]]; then
         builtin cd "${@}"
         return
     fi
