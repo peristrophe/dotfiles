@@ -16,6 +16,7 @@ set hlsearch
 set incsearch
 set number
 set background=dark
+set viminfo='20,\"10000
 colorscheme desert
 highlight LineNr ctermfg=darkyellow
 syntax on
