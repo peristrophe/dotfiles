@@ -1,4 +1,20 @@
-PS1="\[\e[0;32m\]\u@\h:\W\\$\[\e[m\] "
+# Created by newuser for 5.4.2
+if [ -f /usr/local/opt/zsh-git-prompt/zshrc.sh ];
+then
+    . /usr/local/opt/zsh-git-prompt/zshrc.sh
+    ZSH_THEME_GIT_PROMPT_PREFIX="["
+    ZSH_THEME_GIT_PROMPT_SUFFIX=" ]"
+    ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
+    ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{ %G%}"
+    ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{x%G%}"
+    ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{+%G%}"
+    ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[red]%}%{-%G%}"
+    ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}%{+%G%}"
+    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
+    RPROMPT='$(git_super_status)'
+fi
+
+PROMPT='%F{green}%n@%m:%c%# %f'
 
 # for vim-lightline
 export TERM=xterm-256color
@@ -18,7 +34,7 @@ eval "$(rbenv init -)"
 # settings for jvm
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-[ -f ~/.bash.secure ] && . ~/.bash.secure
+[ -f ~/.zsh.secure ] && . ~/.zsh.secure
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
@@ -44,19 +60,6 @@ function urlDec() {
     else
         echo $1 | nkf --url-input -W
     fi
-}
-
-function git-root() {
-    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        cd $(git rev-parse --show-cdup)
-    fi
-}
-
-function psqljobs() {
-psql << __EOQ__
-\x
-select * from pg_stat_activity;
-__EOQ__
 }
 
 function gitcd() {
@@ -93,3 +96,4 @@ alias ls='ls -G'
 alias ll='ls -Gl'
 alias la='ls -GlA'
 alias view='vim -R'
+
