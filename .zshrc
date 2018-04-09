@@ -22,6 +22,12 @@ export TERM=xterm-256color
 # ref: https://yoheikoga.github.io/2016/07/19/change-ls-background-color/
 export LSCOLORS='Exfxcxdxbxegedabagacad'
 
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export SAVEHIST=100000
+setopt hist_ignore_dups
+setopt EXTENDED_HISTORY
+
 # settings for pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -96,4 +102,5 @@ alias ls='ls -G'
 alias ll='ls -Gl'
 alias la='ls -GlA'
 alias view='vim -R'
-
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
+alias history='history -E 1'

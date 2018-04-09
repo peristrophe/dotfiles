@@ -6,25 +6,25 @@ tap "homebrew/core"
 tap "rcmdnk/file"
 cask "java"
 cask "caskroom/versions/java8"
-brew "bash", link: false
+brew "bash"
 brew "embulk"
-brew "ffmpeg", link: false
-brew "git", link: false
+brew "ffmpeg"
+brew "git"
 brew "jq"
 brew "mecab"
 brew "mecab-ipadic"
-brew "mysql", link: false
+brew "mysql"
 brew "nkf"
 brew "nodebrew"
 brew "postgresql"
 brew "pyenv"
-brew "r", link: false
+brew "r"
 brew "rbenv"
 brew "sqlite"
 brew "swftools"
 brew "tree"
 brew "watch"
-brew "wget", link: false
+brew "wget"
 brew "youtube-dl"
 brew "zsh"
 brew "zsh-git-prompt"

@@ -16,6 +16,8 @@
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dotfiles/setup/etc</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -54,13 +56,17 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>929 111 445 77 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>258 404 796 473 0 0 1440 877 </string>
+	<string>104 356 918 512 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>413 349 1018 503 0 0 1440 877 </string>
+	<string>14 351 1018 503 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>224 210 1018 503 0 0 1440 877 </string>
+	<string>411 145 1018 503 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>31 133 1018 503 0 0 1440 877 </string>
+	<key>NeverWarnAboutShortLivedSessions_E32FFA68-8604-4CCC-94B1-82BA69A2CDAE</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_E32FFA68-8604-4CCC-94B1-82BA69A2CDAE_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -247,7 +253,7 @@
 			<key>Columns</key>
 			<integer>144</integer>
 			<key>Command</key>
-			<string>/usr/local/opt/zsh</string>
+			<string>/usr/local/bin/tmux</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -267,7 +273,7 @@
 				<real>1</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -644,7 +650,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.23913388324873083</real>
+			<real>0.24639712880710662</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -673,6 +679,8 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>544673325.42313004</real>
 	<key>PointerActions</key>
@@ -710,6 +718,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/uu129259/dotfiles/setup/etc</string>
+	<key>PromptOnQuit</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -719,7 +729,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-04-06T02:28:07Z</date>
+	<date>2018-04-09T01:41:45Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>WordCharacters</key>

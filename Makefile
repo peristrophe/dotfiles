@@ -1,3 +1,5 @@
+### ref: https://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
+### POWERED BY: https://github.com/b4b4r07/dotfiles
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*)
 EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml
@@ -12,9 +14,6 @@ list: ## Show dot files in this repo
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
 deploy: ## Create symlink to home directory
-	@echo 'Copyright (c) 2013-2015 BABAROT All Rights Reserved.'
-	@echo '==> Start to deploy dotfiles to home directory.'
-	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
 ##init: ## Setup environment settings
