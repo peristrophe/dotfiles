@@ -1,18 +1,20 @@
-# Created by newuser for 5.4.2
-if [ -f /usr/local/opt/zsh-git-prompt/zshrc.sh ];
-then
-    . /usr/local/opt/zsh-git-prompt/zshrc.sh
-    ZSH_THEME_GIT_PROMPT_PREFIX="["
-    ZSH_THEME_GIT_PROMPT_SUFFIX=" ]"
-    ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
-    ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{ %G%}"
-    ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{x%G%}"
-    ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{+%G%}"
-    ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[red]%}%{-%G%}"
-    ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}%{+%G%}"
-    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
-    RPROMPT='$(git_super_status)'
-fi
+## Created by newuser for 5.4.2
+#if [ -f /usr/local/opt/zsh-git-prompt/zshrc.sh ];
+#then
+#    . /usr/local/opt/zsh-git-prompt/zshrc.sh
+#    ZSH_THEME_GIT_PROMPT_PREFIX="["
+#    ZSH_THEME_GIT_PROMPT_SUFFIX=" ]"
+#    ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
+#    ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{ %G%}"
+#    ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{x%G%}"
+#    ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{+%G%}"
+#    ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[red]%}%{-%G%}"
+#    ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}%{+%G%}"
+#    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
+#    RPROMPT='$(git_super_status)'
+#fi
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd tmux-refresh
 
 PROMPT='%F{green}%n@%m:%c%# %f'
 
@@ -41,6 +43,15 @@ eval "$(rbenv init -)"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 [ -f ~/.zsh.secure ] && . ~/.zsh.secure
+
+alias cd='gitcd'
+alias ..='cd ..'
+alias ls='ls -G'
+alias ll='ls -Gl'
+alias la='ls -GlA'
+alias view='vim -R'
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
+alias history='history -E 1'
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
@@ -96,11 +107,6 @@ function gitcd() {
     return
 }
 
-alias cd='gitcd'
-alias ..='cd ..'
-alias ls='ls -G'
-alias ll='ls -Gl'
-alias la='ls -GlA'
-alias view='vim -R'
-alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
-alias history='history -E 1'
+function tmux-refresh() {
+    [ ! -z $TMUX ] && tmux refresh-client -S
+}

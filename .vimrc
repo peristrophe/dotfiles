@@ -53,12 +53,13 @@ set showcmd
 set smartcase
 set showmatch
 set matchtime=1
-"set expandtab
+set noexpandtab
 "set tabstop=4
 "set shiftwidth=4
-"set smarttab
-"set autoindent
-"set smartindent
+set nosmarttab
+set noautoindent
+set nosmartindent
+set nocindent
 "set whichwrap=b,s,h,l,<,>,[,]
 set hlsearch
 set incsearch
