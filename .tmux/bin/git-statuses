@@ -6,10 +6,11 @@ GIT_BRANCH_STYLE="#[fg=colour148,bg=colour22,bold]"
 GIT_STAGED_STYLE="#[fg=colour46,nobold]"
 GIT_CHANGED_STYLE="#[fg=colour196,nobold]"
 
-#STAT_AHEAD_STYLE="#[fg=colour196,bg=colour236,nobold]"
+#STAT_AHEAD_STYLE="#[fg=green,bg=colour236,nobold]"
 #STAT_BEHIND_STYLE="#[fg=colour196,bg=colour236,nobold]"
 #STAT_CONFLICTS_STYLE="#[fg=colour196,bg=colour236,nobold]"
 STAT_CLEAN_STYLE="#[fg=green,bg=colour236,nobold]"
+STAT_READY_STYLE="#[fg=green,bg=colour236,nobold]"
 STAT_ALERT_STYLE="#[fg=red,bg=colour236,nobold]"
 
 _GIT_STATUS=$(/usr/local/opt/zsh-git-prompt/gitstatus.py)
@@ -20,7 +21,10 @@ GIT_INFO="${GIT_BRANCH_STYLE} @${statuses[1]}"
 if [ "$(expr ${statuses[2]} + ${statuses[3]} + ${statuses[4]} + ${statuses[5]} + ${statuses[6]})" -eq "0" ];
 then
     GIT_STAT="${STAT_CLEAN_STYLE} ✔  #[default]"
-elif [ "${statuses[2]}" -ne "0" -o "${statuses[3]}" -ne "0" -o "${statuses[5]}" -ne "0" ];
+elif [ "$(expr ${statuses[3]} + ${statuses[4]} + ${statuses[5]} + ${statuses[6]})" -eq "0" ];
+then
+    GIT_STAT="${STAT_READY_STYLE} ●  #[default]"
+elif [ "${statuses[3]}" -ne "0" -o "${statuses[5]}" -ne "0" ];
 then
     GIT_STAT="${STAT_ALERT_STYLE} ✖  #[default]"
 else
