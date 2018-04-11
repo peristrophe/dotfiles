@@ -1,6 +1,6 @@
 #!/usr/local/bin/zsh
 
-cd ${1}
+cd "${1}"
 
 insideProject=$(git rev-parse --is-inside-work-tree)
 
@@ -10,7 +10,7 @@ then
     relativePath=$(echo "${1}" | sed "s%${topPath}%%")
     repositoryName=$(basename ${topPath})
     [ ! -n "${relativePath}" ] && relativePath="/"
-    echo "${repositoryName}::${relativePath}"
+    echo "(${repositoryName})#[nobold]${relativePath}"
 else
     echo "${1}"
 fi
