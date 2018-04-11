@@ -1,9 +1,0 @@
-#!/usr/local/bin/zsh
-
-#. ~/.zshrc
-#echo $PATH | tr ':' '\n' | wc -l
-
-eval `/usr/libexec/path_helper -s`
-
-cd ${1}
-python -V 2>&1 | grep -oE '\d\.\d\.\d'
