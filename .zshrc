@@ -16,9 +16,13 @@
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd tmux-refresh
 
-#PROMPT='%F{green}%n@%m:%c%# %f'
-#PROMPT="%B%K{231}%F{23} $(tmux display -p '#P') %b%K{220}%F{231}%F{black} %c %F{220}%k%f "
-PROMPT="%B%K{220}%F{52} $(tmux display -p '#P') %b%K{172}%F{220}%F{black} %c %F{172}%k%f "
+if [ "$TERM_PROGRAM" = 'iTerm.app' ];
+then
+    #PROMPT="%B%K{220}%F{52} $(tmux display -p '#P') %b%K{172}%F{220}%F{black} %c %F{172}%k%f "
+    PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+else
+    PROMPT="%F{green}%n@%m:%c%# %f"
+fi
 
 # for vim-lightline
 export TERM=xterm-256color
