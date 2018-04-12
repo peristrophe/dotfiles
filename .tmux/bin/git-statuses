@@ -27,7 +27,7 @@ else
     STAT_ALERT_STYLE="#[fg=colour52,bg=red,nobold] ＄ #[default]"
 fi
 
-GIT_INFO="${GIT_BRANCH_STYLE} @${statuses[0]}#[nobold]"
+GIT_INFO="${GIT_BRANCH_STYLE} ⭠ ${statuses[0]}#[nobold]"
 if [ "$(expr ${statuses[1]} + ${statuses[2]} + ${statuses[3]} + ${statuses[4]} + ${statuses[5]})" -eq "0" ];
 then
     #GIT_STAT="${STAT_CLEAN_STYLE} ✔ "

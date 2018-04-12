@@ -16,7 +16,9 @@
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd tmux-refresh
 
-PROMPT='%F{green}%n@%m:%c%# %f'
+#PROMPT='%F{green}%n@%m:%c%# %f'
+#PROMPT="%B%K{231}%F{23} $(tmux display -p '#P') %b%K{220}%F{231}%F{black} %c %F{220}%k%f "
+PROMPT="%B%K{220}%F{52} $(tmux display -p '#P') %b%K{172}%F{220}%F{black} %c %F{172}%k%f "
 
 # for vim-lightline
 export TERM=xterm-256color
