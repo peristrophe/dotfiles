@@ -56,11 +56,13 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>929 111 445 77 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>104 356 918 512 0 0 1440 877 </string>
+	<string>68 285 796 473 0 0 1440 877 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>14 351 1018 503 0 0 1440 877 </string>
+	<string>400 94 1018 503 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>411 145 1018 503 0 0 1440 877 </string>
+	<string>9 329 1018 503 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>31 133 1018 503 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_E32FFA68-8604-4CCC-94B1-82BA69A2CDAE</key>
@@ -598,7 +600,7 @@
 			<key>Name</key>
 			<string>RichEnviron</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 12</string>
+			<string>GoMonoForPowerline 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -650,7 +652,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.24639712880710662</real>
+			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -660,7 +662,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -729,9 +731,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-04-09T01:41:45Z</date>
+	<date>2018-04-12T03:53:45Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1523332480</real>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
