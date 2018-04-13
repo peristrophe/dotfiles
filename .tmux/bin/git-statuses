@@ -9,14 +9,14 @@ statuses=(${_GIT_STATUS})
 
 if [ "${2}" = '--insert-theme' ];
 then
-    [ ! -n "${statuses[0]}" ] && echo ' #[fg=colour24,bg=colour17] #[fg=colour17,bg=default]' && exit 0
+    [ ! -n "${statuses[0]}" ] && echo '#[default]' && exit 0
     GIT_BRANCH_STYLE="#[fg=colour117,bold]"
     GIT_STAGED_STYLE="#[fg=colour46]"
     GIT_CHANGED_STYLE="#[fg=colour196]"
     GIT_UNTRACKED_STYLE="#[fg=colour207]"
-    STAT_CLEAN_STYLE="#[fg=colour24,bg=green]#[fg=colour22,nobold] __MARK__ #[fg=green,bg=default]"
-    STAT_READY_STYLE="#[fg=colour24,bg=green]#[fg=colour22,nobold] __MARK__ #[fg=green,bg=default]"
-    STAT_ALERT_STYLE="#[fg=colour24,bg=red]#[fg=colour52,nobold] __MARK__ #[fg=red,bg=default]"
+    STAT_CLEAN_STYLE="#[fg=green,bg=colour24]#[fg=colour22,bg=green,nobold] __MARK__  #[fg=default]#[default]"
+    STAT_READY_STYLE="#[fg=green,bg=colour24]#[fg=colour22,bg=green,nobold] __MARK__  #[fg=default]#[default]"
+    STAT_ALERT_STYLE="#[fg=red,bg=colour24]#[fg=colour52,bg=red,nobold] __MARK__  #[fg=default]#[default]"
 else
     GIT_BRANCH_STYLE="#[fg=colour148,bold]"
     GIT_STAGED_STYLE="#[fg=colour46]"
@@ -27,7 +27,7 @@ else
     STAT_ALERT_STYLE="#[fg=colour52,bg=red,nobold] __MARK__ #[default]"
 fi
 
-GIT_INFO="${GIT_BRANCH_STYLE} ⭠ ${statuses[0]}#[nobold]"
+GIT_INFO="#[fg=colour24]#[bg=colour24]${GIT_BRANCH_STYLE}  ⭠ ${statuses[0]}#[nobold]"
 if [ "$(expr ${statuses[1]} + ${statuses[2]} + ${statuses[3]} + ${statuses[4]} + ${statuses[5]})" -eq "0" ];
 then
     #GIT_STAT="${STAT_CLEAN_STYLE} ✔ "
