@@ -1,13 +1,14 @@
 #!/bin/bash
 
+[ "${1}" != '1' ] && echo '' && exit 0
 here=$(cd $(dirname $0); pwd)
-cd "${1}"
+cd "${2}"
 
 _GIT_STATUS=$(python "${here}/gitstatus.py")
 declare -a statuses
 statuses=(${_GIT_STATUS})
 
-if [ "${2}" = '--insert-theme' ];
+if [ "${3}" = '--insert-theme' ];
 then
     [ ! -n "${statuses[0]}" ] && echo '#[default]' && exit 0
     GIT_BRANCH_STYLE="#[fg=colour117,bold]"
@@ -27,7 +28,7 @@ else
     STAT_ALERT_STYLE="#[fg=colour52,bg=red,nobold] __MARK__ #[default]"
 fi
 
-GIT_INFO="#[fg=colour24]#[bg=colour24]${GIT_BRANCH_STYLE}  ⭠ ${statuses[0]}#[nobold]"
+GIT_INFO="#[fg=colour24]#[bg=colour24]${GIT_BRANCH_STYLE}   ${statuses[0]}#[nobold]"
 if [ "$(expr ${statuses[1]} + ${statuses[2]} + ${statuses[3]} + ${statuses[4]} + ${statuses[5]})" -eq "0" ];
 then
     #GIT_STAT="${STAT_CLEAN_STYLE} ✔ "
