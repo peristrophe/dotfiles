@@ -74,6 +74,7 @@ set ttymouse=xterm2
 colorscheme desert
 highlight LineNr ctermfg=darkyellow
 syntax on
+set clipboard=unnamed,autoselect
 
 
 
