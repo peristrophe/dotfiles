@@ -18,7 +18,6 @@ add-zsh-hook precmd tmux-refresh
 
 if [ "$TERM_PROGRAM" = 'iTerm.app' ];
 then
-    #PROMPT="%B%K{220}%F{52} $(tmux display -p '#P') %b%K{172}%F{220}%F{black} %c %F{172}%k%f "
     PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
 else
     PROMPT="%F{green}%n@%m:%c%# %f"
@@ -61,10 +60,18 @@ alias history='history -E 1'
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
+    [ -f "${1}" ] && local queryfromfile=true || queryfromfile=false
 
     local query=${1}
     shift
-    td query -wc -T 'presto' -f 'tsv' -d 'studysapuri_masters' -q "${PWD}/${query}" ${@}
+    if ${queryfromfile};
+    then
+        echo "td query -wc -T presto -f tsv -d studysapuri_masters -q ${PWD}/${query} ${@}"
+        td query -wc -T 'presto' -f 'tsv' -d 'studysapuri_masters' -q "${PWD}/${query}" ${@}
+    else
+        echo "td query -wc -T presto -f tsv -d studysapuri_masters \"${query}\" ${@}"
+        td query -wc -T 'presto' -f 'tsv' -d 'studysapuri_masters' "${query}" ${@}
+    fi
 }
 
 function urlEnc() {
