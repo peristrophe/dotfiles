@@ -2,8 +2,7 @@
 #if [ -f /usr/local/opt/zsh-git-prompt/zshrc.sh ];
 #then
 #    . /usr/local/opt/zsh-git-prompt/zshrc.sh
-#    ZSH_THEME_GIT_PROMPT_PREFIX="["
-#    ZSH_THEME_GIT_PROMPT_SUFFIX=" ]"
+#    ZSH_THEME_GIT_PROMPT_PREFIX="[" #    ZSH_THEME_GIT_PROMPT_SUFFIX=" ]"
 #    ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
 #    ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{ %G%}"
 #    ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{x%G%}"
@@ -122,4 +121,33 @@ function gitcd() {
 
 function tmux-refresh() {
     [ ! -z $TMUX ] && tmux refresh-client -S
+}
+
+function pg-proc-list() {
+    psql -f - << __EOQ__
+SELECT
+    procpid,
+    start,
+    now() - start AS lap,
+    current_query
+FROM
+    (SELECT
+        backendid,
+        pg_stat_get_backend_pid(S.backendid) AS procpid,
+        pg_stat_get_backend_activity_start(S.backendid) AS start,
+        pg_stat_get_backend_activity(S.backendid) AS current_query
+    FROM
+        (SELECT pg_stat_get_backend_idset() AS backendid) AS S
+    ) AS S
+WHERE
+    current_query <> ''
+ORDER BY
+    lap DESC;
+__EOQ__
+}
+
+function pg-proc-termination() {
+    [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
+    [[ ! ${1} =~ ^[0-9]*$ ]] && echo 'wrong argument type.' >&2 && return 1
+    psql -c "SELECT pg_terminate_backend(${1});"
 }
