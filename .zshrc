@@ -65,11 +65,11 @@ function tdq() {
     shift
     if ${queryfromfile};
     then
-        echo "td query -wc -T presto -f tsv -d studysapuri_masters -q ${PWD}/${query} ${@}"
-        td query -wc -T 'presto' -f 'tsv' -d 'studysapuri_masters' -q "${PWD}/${query}" ${@}
+        echo "td query -wc -T presto -f tsv -d studysapuri -q ${PWD}/${query} ${@}"
+        td query -wc -T 'presto' -f 'tsv' -d 'studysapuri' -q "${PWD}/${query}" ${@}
     else
-        echo "td query -wc -T presto -f tsv -d studysapuri_masters \"${query}\" ${@}"
-        td query -wc -T 'presto' -f 'tsv' -d 'studysapuri_masters' "${query}" ${@}
+        echo "td query -wc -T presto -f tsv -d studysapuri \"${query}\" ${@}"
+        td query -wc -T 'presto' -f 'tsv' -d 'studysapuri' "${query}" ${@}
     fi
 }
 
