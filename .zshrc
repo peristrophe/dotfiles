@@ -126,21 +126,31 @@ function tmux-refresh() {
 function pg-proc-list() {
     psql -f - << __EOQ__
 SELECT
-    procpid,
-    start,
-    now() - start AS lap,
-    current_query
+    pid,
+    usename AS user,
+    TO_CHAR(start_jst, 'YYYY-MM-DD HH24:MI:SS') AS start,
+    TO_CHAR(NOW() - start_utc, 'HH24:MI:SS') AS lap,
+    CASE WHEN CHAR_LENGTH(query) >36 
+        THEN CONCAT(SUBSTRING(query, 1, 33), '...')
+        ELSE query
+    END AS current_query
 FROM
     (SELECT
         backendid,
-        pg_stat_get_backend_pid(S.backendid) AS procpid,
-        pg_stat_get_backend_activity_start(S.backendid) AS start,
-        pg_stat_get_backend_activity(S.backendid) AS current_query
+        PG_STAT_GET_BACKEND_PID(S.backendid) AS pid,
+        PG_STAT_GET_BACKEND_USERID(S.backendid) AS userid,
+        PG_STAT_GET_BACKEND_ACTIVITY_START(S.backendid) AS start_utc,
+        PG_STAT_GET_BACKEND_ACTIVITY_START(S.backendid) + interval '9 hours' AS start_jst,
+        REGEXP_REPLACE(PG_STAT_GET_BACKEND_ACTIVITY(S.backendid), '[\\n ]+', ' ', 'g') AS query
     FROM
-        (SELECT pg_stat_get_backend_idset() AS backendid) AS S
+        (SELECT PG_STAT_GET_BACKEND_IDSET() AS backendid) AS S
     ) AS S
+LEFT OUTER JOIN
+    pg_user AS U
+ON
+    S.userid = U.usesysid
 WHERE
-    current_query <> ''
+    query <> ''
 ORDER BY
     lap DESC;
 __EOQ__
