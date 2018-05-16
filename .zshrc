@@ -124,14 +124,16 @@ function tmux-refresh() {
 }
 
 function pg-proc-list() {
-    psql -f - << __EOQ__
+    local colwidth=$(echo "$(tput cols) - 65" | bc)
+    local trimsize=$(echo "${colwidth} - 3" | bc)
+    psql -q -f - << __EOQ__
 SELECT
     pid,
     usename AS user,
     TO_CHAR(start_jst, 'YYYY-MM-DD HH24:MI:SS') AS start,
     TO_CHAR(NOW() - start_utc, 'HH24:MI:SS') AS lap,
-    CASE WHEN CHAR_LENGTH(query) >36 
-        THEN CONCAT(SUBSTRING(query, 1, 33), '...')
+    CASE WHEN CHAR_LENGTH(query) >${colwidth}
+        THEN CONCAT(SUBSTRING(query, 1, ${trimsize}), '...')
         ELSE query
     END AS current_query
 FROM

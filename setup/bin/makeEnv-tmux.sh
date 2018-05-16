@@ -3,20 +3,15 @@
 here=$(cd $(dirname $0); pwd)
 . ${here}/settings.sh
 
-#if [ -d "${GITDIR}/fonts" ];
+#if [ ! -d "${GITDIR}/fonts" ];
 #then
-#    cd "${GITDIR}/fonts"
-#    git pull
-#else
 #    git clone https://github.com/powerline/fonts.git ${GITDIR}/fonts
 #fi
 
-if [ -d "${GITDIR}/fontpatcher" ];
+if [ ! -d "${GITDIR}/fontpatcher" ];
 then
-    cd "${GITDIR}/fontpatcher"
-    git pull
-else
     git clone https://github.com/powerline/fontpatcher.git ${GITDIR}/fontpatcher
+    git checkout c3488091611757cb02014ed7ed2f11be0208da83
 fi
 
 [ -f ~/Downloads/NasuFonts.zip ] && rm -f ~/Downloads/NasuFonts.zip
