@@ -14,6 +14,7 @@
 #fi
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd tmux-refresh
+stty stop undef
 
 if [ "$TERM_PROGRAM" = 'iTerm.app' ];
 then
@@ -162,4 +163,10 @@ function pg-proc-termination() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
     [[ ! ${1} =~ ^[0-9]*$ ]] && echo 'wrong argument type.' >&2 && return 1
     psql -c "SELECT pg_terminate_backend(${1});"
+}
+
+function prepare-tmux() {
+    tmux split-pane
+    tmux split-pane -h
+    #tmux select-layout main-horizontal
 }

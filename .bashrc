@@ -94,3 +94,5 @@ alias ll='ls -Gl'
 alias la='ls -GlA'
 alias view='vim -R'
 alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
+
+stty stop undef
