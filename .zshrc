@@ -165,7 +165,7 @@ function pg-proc-termination() {
     psql -c "SELECT pg_terminate_backend(${1});"
 }
 
-function prepare-tmux() {
+function tmux-prepare() {
     tmux split-pane
     tmux split-pane -h
     #tmux select-layout main-horizontal
