@@ -1,5 +1,6 @@
 ### ref: https://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
 ### POWERED BY: https://github.com/b4b4r07/dotfiles
+
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*)
 EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml

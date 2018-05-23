@@ -16,12 +16,17 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd tmux-refresh
 stty stop undef
 
-if [ "$TERM_PROGRAM" = 'iTerm.app' ];
-then
-    PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
-else
-    PROMPT="%F{green}%n@%m:%c%# %f"
-fi
+case "$TERM_PROGRAM" in
+    'iTerm.app') PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+        ;;
+    'Hyper')
+        PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+        #[ $(which tmux) ] && exec $(which tmux)
+        ;;
+    *)
+        PROMPT="%F{green}%n@%m:%c%# %f"
+        ;;
+esac
 
 # for vim-lightline
 export TERM=xterm-256color
@@ -47,6 +52,8 @@ eval "$(rbenv init -)"
 # settings for jvm
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
+export LANG=ja_JP.UTF-8
+
 [ -f ~/.zsh.secure ] && . ~/.zsh.secure
 
 alias cd='gitcd'
@@ -57,6 +64,7 @@ alias la='ls -GlA'
 alias view='vim -R'
 alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 alias history='history -E 1'
+alias relogin='exec $SHELL -l'
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
