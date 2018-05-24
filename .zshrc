@@ -13,14 +13,15 @@
 #    RPROMPT='$(git_super_status)'
 #fi
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd tmux-refresh
 stty stop undef
 
 case "$TERM_PROGRAM" in
-    'iTerm.app') PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+    'iTerm.app')
+        PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+        add-zsh-hook precmd tmux-refresh
         ;;
     'Hyper')
-        PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+        PROMPT="%B%K{148}%F{22} %n %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
         #[ $(which tmux) ] && exec $(which tmux)
         ;;
     *)

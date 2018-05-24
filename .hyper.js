@@ -34,7 +34,7 @@ module.exports = {
     cursorBlink: true,
 
     // color of the text
-    foregroundColor: '#aaa',
+    foregroundColor: '#ccc',
 
     // terminal background color
     // opacity is only supported on macOS
@@ -137,6 +137,12 @@ module.exports = {
       //aheadColor: 'ivory',
       footerTransparent: true,
     },
+    hyperline: {
+      plugins: [
+        "ip",
+        "cpu",
+      ]
+    },
   },
 
   // a list of plugins to fetch and install from npm
@@ -147,7 +153,9 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     'hyper-statusline',
+    //'hyperline',
     'hyperlinks',
+    'hyperterm-material',
   ],
 
   // in development, you can create a directory under
