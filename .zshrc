@@ -1,17 +1,4 @@
 ## Created by newuser for 5.4.2
-#if [ -f /usr/local/opt/zsh-git-prompt/zshrc.sh ];
-#then
-#    . /usr/local/opt/zsh-git-prompt/zshrc.sh
-#    ZSH_THEME_GIT_PROMPT_PREFIX="[" #    ZSH_THEME_GIT_PROMPT_SUFFIX=" ]"
-#    ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
-#    ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{ %G%}"
-#    ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[magenta]%}%{x%G%}"
-#    ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{+%G%}"
-#    ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[red]%}%{-%G%}"
-#    ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}%{+%G%}"
-#    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
-#    RPROMPT='$(git_super_status)'
-#fi
 autoload -Uz add-zsh-hook
 stty stop undef
 
@@ -54,6 +41,7 @@ eval "$(rbenv init -)"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 export LANG=ja_JP.UTF-8
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 [ -f ~/.zsh.secure ] && . ~/.zsh.secure
 
