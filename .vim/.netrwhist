@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/uu129259/Projects/egs-analysis/embulk'
+let g:netrw_dirhist_2='/Users/uu129259/Projects/junk/bin/hack_jenkins'
+let g:netrw_dirhist_3='/Users/uu129259/Projects/aya-td-jobs/embulk/config/mongodb/plazmadb'
+let g:netrw_dirhist_4='/Users/uu129259/Projects/aya-td-jobs/luigi/tasks/queries'

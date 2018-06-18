@@ -153,7 +153,7 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     'hyper-statusline',
-    //'hyperline',
+    //'hyperline#0.6.1',
     'hyperlinks',
     'hyperterm-material',
   ],
