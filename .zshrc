@@ -40,6 +40,9 @@ eval "$(rbenv init -)"
 # settings for jvm
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
+# settings for nodebrew
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
+
 export LANG=ja_JP.UTF-8
 export PATH="$HOME/dotfiles/bin:$PATH"
 
