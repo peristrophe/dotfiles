@@ -137,12 +137,27 @@ module.exports = {
       //aheadColor: 'ivory',
       footerTransparent: true,
     },
+
     hyperline: {
       plugins: [
-        "ip",
-        "cpu",
+        {
+          name: 'network',
+          options: {
+            color: 'lightCyan'
+          }
+        },
+        {
+          name: 'battery',
+          options: {
+            colors: {
+              fine: 'lightGreen',
+              critical: 'lightRed'
+            }
+          }
+        }
       ]
     },
+
   },
 
   // a list of plugins to fetch and install from npm
@@ -161,7 +176,9 @@ module.exports = {
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: [],
+  localPlugins: [
+    //'hyperline',
+  ],
 
   keymaps: {
     // Example
