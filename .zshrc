@@ -19,9 +19,6 @@ esac
 # for vim-lightline
 export TERM=xterm-256color
 
-# ref: https://yoheikoga.github.io/2016/07/19/change-ls-background-color/
-export LSCOLORS='Exfxcxdxbxegedabagacad'
-
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
@@ -29,38 +26,65 @@ setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
 
 # settings for pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if [ -d ~/.pyenv ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
 
 # settings for rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ -d ~/.rbenv ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
 
 # settings for goenv
-export PATH="$HOME/.goenv/bin:$PATH"
-eval "$(goenv init -)"
+if [ -d ~/.goenv ]; then
+    export PATH="$HOME/.goenv/bin:$PATH"
+    eval "$(goenv init -)"
+fi
 
 # settings for jvm
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 # settings for nodebrew
-export PATH="$HOME/.nodebrew/current/bin:$PATH"
+if [ -d ~/.nodebrew ]; then
+    export PATH="$HOME/.nodebrew/current/bin:$PATH"
+fi
 
-export LANG=ja_JP.UTF-8
 export PATH="$HOME/dotfiles/bin:$PATH"
 
-[ -f ~/.zsh.secure ] && . ~/.zsh.secure
+case $(uname) in
+    "Darwin")
+        # ref: https://yoheikoga.github.io/2016/07/19/change-ls-background-color/
+        export LSCOLORS='Exfxcxdxbxegedabagacad'
+        export LANG=ja_JP.UTF-8
 
-alias cd='gitcd'
-alias ..='cd ..'
-alias ls='ls -G'
-alias ll='ls -Gl'
-alias la='ls -GlA'
-alias view='vim -R'
-alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
-alias history='history -E 1'
-alias relogin='exec $SHELL -l'
+        alias cd='gitcd'
+        alias ..='cd ..'
+        alias ls='ls -G'
+        alias ll='ls -Gl'
+        alias la='ls -GlA'
+        alias view='vim -R'
+        alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
+        alias history='history -E 1'
+        alias relogin='exec $SHELL -l'
+        ;;
+    "Linux")
+        alias cd='gitcd'
+        alias ..='cd ..'
+        alias ls='ls --color=auto'
+        alias ll='ls -l --color=auto'
+        alias la='ls -lA --color=auto'
+        alias view='vim -R'
+        alias history='history -E 1'
+        alias relogin='exec $SHELL -l'
+        ;;
+    *)
+        ;;
+esac
+
+[ -f ~/.zsh.secure ] && . ~/.zsh.secure
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
@@ -126,47 +150,6 @@ function gitcd() {
 
 function tmux-refresh() {
     [ ! -z $TMUX ] && tmux refresh-client -S
-}
-
-function pg-proc-list() {
-    local colwidth=$(echo "$(tput cols) - 65" | bc)
-    local trimsize=$(echo "${colwidth} - 3" | bc)
-    psql -q -f - << __EOQ__
-SELECT
-    pid,
-    usename AS user,
-    TO_CHAR(start_jst, 'YYYY-MM-DD HH24:MI:SS') AS start,
-    TO_CHAR(NOW() - start_utc, 'HH24:MI:SS') AS lap,
-    CASE WHEN CHAR_LENGTH(query) >${colwidth}
-        THEN CONCAT(SUBSTRING(query, 1, ${trimsize}), '...')
-        ELSE query
-    END AS current_query
-FROM
-    (SELECT
-        backendid,
-        PG_STAT_GET_BACKEND_PID(S.backendid) AS pid,
-        PG_STAT_GET_BACKEND_USERID(S.backendid) AS userid,
-        PG_STAT_GET_BACKEND_ACTIVITY_START(S.backendid) AS start_utc,
-        PG_STAT_GET_BACKEND_ACTIVITY_START(S.backendid) + interval '9 hours' AS start_jst,
-        REGEXP_REPLACE(PG_STAT_GET_BACKEND_ACTIVITY(S.backendid), '[\\n ]+', ' ', 'g') AS query
-    FROM
-        (SELECT PG_STAT_GET_BACKEND_IDSET() AS backendid) AS S
-    ) AS S
-LEFT OUTER JOIN
-    pg_user AS U
-ON
-    S.userid = U.usesysid
-WHERE
-    query <> ''
-ORDER BY
-    lap DESC;
-__EOQ__
-}
-
-function pg-proc-termination() {
-    [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
-    [[ ! ${1} =~ ^[0-9]*$ ]] && echo 'wrong argument type.' >&2 && return 1
-    psql -c "SELECT pg_terminate_backend(${1});"
 }
 
 function tmux-prepare() {
