@@ -85,6 +85,7 @@ case $(uname) in
 esac
 
 [ -f ~/.zsh.secure ] && . ~/.zsh.secure
+[ ! -n "${SHELL}" ] && export SHELL=$(which zsh)
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
