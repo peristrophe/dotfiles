@@ -6,6 +6,7 @@ CANDIDATES := $(wildcard .??*)
 EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 BREWFILES  := $(wildcard Brewfile*)
+DEPTHS     := ./sandbox/Makefile
 
 .DEFAULT_GOAL := help
 
@@ -16,6 +17,7 @@ list: ## Show dot files in this repo
 
 deploy: ## Create symlink to home directory
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+	@$(foreach val, $(DEPTHS), ln -sfnv $(abspath $(val)) $(HOME)/$(notdir $(val))) 
 
 ##init: ## Setup environment settings
 ##	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
