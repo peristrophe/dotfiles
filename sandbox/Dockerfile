@@ -20,6 +20,10 @@ RUN pacman -Syy
 RUN pacman -S --noconfirm zsh vim git make
 RUN pacman -S --noconfirm bluez bluez-libs
 
+RUN mkdir -p ${HOME}/.vim/bundle
+RUN git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
+RUN vim +PluginInstall +qall
+
 RUN git clone https://github.com/peristrophe/dotfiles.git
 WORKDIR /root/dotfiles
 RUN make deploy
