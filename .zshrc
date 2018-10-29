@@ -37,6 +37,10 @@ eval "$(pyenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# settings for goenv
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"
+
 # settings for jvm
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
