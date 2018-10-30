@@ -6,10 +6,10 @@ NAME  := $(IMAGE)_$(TAG)
 .PHONY: build attach clean cleani cleanc cleant
 
 build:
-	docker build -t $(IMAGE):$(TAG) $(HERE)
+	docker build --squash -t $(IMAGE):$(TAG) $(HERE)
 
-attach: cleanc
-	docker run -it --name=$(NAME) --workdir /root $(IMAGE):$(TAG) /usr/sbin/zsh
+attach:
+	docker run --rm -it --name=$(NAME) --workdir /root $(IMAGE):$(TAG) /usr/sbin/zsh
 
 clean: cleanc cleani
 

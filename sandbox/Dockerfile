@@ -19,11 +19,21 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN pacman -Syy
 RUN pacman -S --noconfirm zsh vim git make
 RUN pacman -S --noconfirm bluez bluez-libs
+RUN pacman -S --noconfirm python3 python-pip
+RUN pacman -S --noconfirm go
 
-RUN mkdir -p ${HOME}/.vim/bundle
-RUN git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
-RUN vim +PluginInstall +qall
+# show installed location: "python -m site --user-site"
+RUN pip install --user PyYAML rsa urllib3
+#RUN pip install --user numpy scipy pandas gensim scikit-learn
 
 RUN git clone https://github.com/peristrophe/dotfiles.git
 WORKDIR /root/dotfiles
 RUN make deploy
+
+RUN mkdir ${PWD}/.vim/bundle
+RUN git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vundle.vim
+RUN vim +PluginInstall +qall
+
+#RUN useradd app -m -G wheel -p app -s $(which zsh)
+#USER app
+#WORKDIR /home/app
