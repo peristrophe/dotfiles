@@ -71,7 +71,7 @@ case $(uname) in
         alias relogin='exec $SHELL -l'
         ;;
     "Linux")
-        if [ -n "$(which dircolors)" -a -d ~/.colorrc ]; then
+        if [ -f "$(which dircolors)" -a -f ~/.colorrc ]; then
             dircolors -b ~/.colorrc > /tmp/ls_colors
             source /tmp/ls_colors
         fi

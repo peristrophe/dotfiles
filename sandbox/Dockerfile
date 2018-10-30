@@ -27,5 +27,3 @@ RUN vim +PluginInstall +qall
 RUN git clone https://github.com/peristrophe/dotfiles.git
 WORKDIR /root/dotfiles
 RUN make deploy
-RUN dircolors -p > ${HOME}/.colorrc
-RUN dircolors -b ${HOME}/.colorrc >> .zshrc
