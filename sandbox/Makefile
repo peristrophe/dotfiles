@@ -11,13 +11,14 @@ build:
 attach: cleanc
 	docker run -it --name=$(NAME) --workdir /root $(IMAGE):$(TAG) /usr/sbin/zsh
 
-clean: cleani cleanc
+clean: cleanc cleani
 
 cleani:
 	-docker rmi $(shell docker images -q $(IMAGE))
+	-docker image prune -f
 
 cleanc:
-	-docker rm -f $(NAME)
+	-docker container prune -f
 
 cleant:
 	-docker rmi $(IMAGE):$(TAG)

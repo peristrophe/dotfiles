@@ -71,6 +71,9 @@ case $(uname) in
         alias relogin='exec $SHELL -l'
         ;;
     "Linux")
+        [ -n "$(which dircolors)" -a -d ~/.colorrc ] && \
+            dircolors -b ~/.colorrc | source -
+
         alias cd='gitcd'
         alias ..='cd ..'
         alias ls='ls --color=auto'
