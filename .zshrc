@@ -12,7 +12,11 @@ case "$TERM_PROGRAM" in
         #[ $(which tmux) ] && exec $(which tmux)
         ;;
     *)
-        PROMPT="%F{yellow}%B%n%b@%F{green}%B%m%b:%F{cyan}%B%c%b%# %f"
+        if [ "$(whoami)" = "root" ]; then
+            PROMPT="%F{red}%B%n%b@%F{magenta}%B%m%b:%F{blue}%B%c%b%# %f"
+        else
+            PROMPT="%F{yellow}%B%n%b@%F{green}%B%m%b:%F{cyan}%B%c%b%# %f"
+        fi
         ;;
 esac
 

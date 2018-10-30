@@ -1,15 +1,16 @@
-HERE  := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
-IMAGE := sandbox
-TAG   := dev
-NAME  := $(IMAGE)_$(TAG)
+HERE     := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+IMAGE    := sandbox
+TAG      := dev
+NAME     := $(IMAGE)_$(TAG)
+USERNAME := app
 
 .PHONY: build attach clean cleani cleanc cleant
 
 build:
-	docker build --squash -t $(IMAGE):$(TAG) $(HERE)
+	docker build --build-arg username=$(USERNAME) --squash -t $(IMAGE):$(TAG) $(HERE)
 
 attach:
-	docker run --rm -it --name=$(NAME) --workdir /root $(IMAGE):$(TAG) /usr/sbin/zsh
+	docker run --rm -it $(IMAGE):$(TAG) $(shell docker run --rm -it $(IMAGE):$(TAG) which zsh)
 
 clean: cleanc cleani
 

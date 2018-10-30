@@ -5,6 +5,8 @@ WORKDIR /root
 ARG aur1="http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/\$repo/os/\$arch"
 ARG aur2="http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/\$repo/os/\$arch"
 
+ARG username="dev"
+
 RUN echo ${aur}
 RUN sed -i '1iServer = '${aur2} /etc/pacman.d/mirrorlist
 RUN sed -i '1iServer = '${aur1} /etc/pacman.d/mirrorlist
@@ -22,10 +24,6 @@ RUN pacman -S --noconfirm bluez bluez-libs
 RUN pacman -S --noconfirm python3 python-pip
 RUN pacman -S --noconfirm go
 
-# show installed location: "python -m site --user-site"
-RUN pip install --user PyYAML rsa urllib3
-#RUN pip install --user numpy scipy pandas gensim scikit-learn
-
 RUN git clone https://github.com/peristrophe/dotfiles.git
 WORKDIR /root/dotfiles
 RUN make deploy
@@ -34,6 +32,21 @@ RUN mkdir ${PWD}/.vim/bundle
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vundle.vim
 RUN vim +PluginInstall +qall
 
-#RUN useradd app -m -G wheel -p app -s $(which zsh)
-#USER app
-#WORKDIR /home/app
+
+
+RUN which zsh | xargs -I{} useradd ${username} -m -G wheel -p ${username} -s {}
+USER ${username}
+WORKDIR /home/${username}
+
+#### show installed location: "python -m site --user-site"
+RUN pip install --user PyYAML rsa urllib3
+#RUN pip install --user numpy scipy pandas gensim scikit-learn
+
+RUN git clone https://github.com/peristrophe/dotfiles.git
+WORKDIR /home/${username}/dotfiles
+RUN make deploy
+
+RUN mkdir ${PWD}/.vim/bundle
+RUN git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vundle.vim
+RUN vim +PluginInstall +qall
+WORKDIR /home/${username}
