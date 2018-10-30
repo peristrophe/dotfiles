@@ -12,7 +12,7 @@ case "$TERM_PROGRAM" in
         #[ $(which tmux) ] && exec $(which tmux)
         ;;
     *)
-        PROMPT="%F{yellow}%B%n%b%f@%F{green}%B%m%b%f:%F{cyan}%B%c%b%# %f"
+        PROMPT="%F{yellow}%B%n%b@%F{green}%B%m%b:%F{cyan}%B%c%b%# %f"
         ;;
 esac
 
