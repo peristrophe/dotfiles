@@ -72,7 +72,8 @@ case $(uname) in
         ;;
     "Linux")
         [ -n "$(which dircolors)" -a -d ~/.colorrc ] && \
-            dircolors -b ~/.colorrc | source -
+            dircolors -b ~/.colorrc > /tmp/ls_colors && \
+            source /tmp/ls_colors
 
         alias cd='gitcd'
         alias ..='cd ..'
