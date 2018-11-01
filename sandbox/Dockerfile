@@ -8,17 +8,14 @@ ARG username="dev"
 
 ENV TERM="xterm"
 
-RUN echo ${aur}
-RUN sed -i '1iServer = '${aur2} /etc/pacman.d/mirrorlist
-RUN sed -i '1iServer = '${aur1} /etc/pacman.d/mirrorlist
-
 RUN sed -i -e 's/^#\(en_US\|ja_JP\)\.UTF-8 UTF-8/\1\.UTF-8 UTF-8/g' /etc/locale.gen
 RUN locale-gen
 RUN echo 'LANG=ja_JP.UTF-8' > /etc/locale.conf
 RUN export LANG=ja_JP.UTF-8
-
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
+RUN sed -i '1iServer = '${aur2} /etc/pacman.d/mirrorlist
+RUN sed -i '1iServer = '${aur1} /etc/pacman.d/mirrorlist
 RUN pacman -Syy
 RUN pacman -S --noconfirm zsh vim git make
 RUN pacman -S --noconfirm bluez bluez-libs
@@ -33,9 +30,10 @@ RUN mkdir ${PWD}/.vim/bundle
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vundle.vim
 RUN vim +PluginInstall +qall
 
-
-
 RUN which zsh | xargs -I{} useradd ${username} -m -G wheel -p ${username} -s {}
+
+
+
 USER ${username}
 WORKDIR /home/${username}
 RUN mkdir Projects

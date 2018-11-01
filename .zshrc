@@ -49,7 +49,9 @@ if [ -d ~/.goenv ]; then
 fi
 
 # settings for jvm
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+if [ -f /usr/libexec/java_home ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+fi
 
 # settings for nodebrew
 if [ -d ~/.nodebrew ]; then
