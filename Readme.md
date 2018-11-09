@@ -35,5 +35,5 @@ usage.
 
 ```
 $ make enter
-$ make enter USERNAME=root   # logging in by root user
+$ make enter USERNAME=root   # logging in as root user
 ```
