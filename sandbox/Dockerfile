@@ -1,4 +1,4 @@
-FROM base/archlinux:2018.10.01
+FROM base/archlinux:2018.11.01
 
 WORKDIR /root
 
@@ -26,6 +26,9 @@ RUN pacman -S --noconfirm rust rust-docs rustup cargo
 RUN rustup install stable
 RUN rustup default stable
 
+RUN pacman -S --noconfirm elixir
+RUN ln -sf "$(find /usr -type f -name 'elixir')" /usr/bin/elixir
+
 RUN echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel_group
 RUN which zsh | xargs -I{} chsh -s {}
 
@@ -48,6 +51,8 @@ RUN mkdir Projects
 #### show installed location: "python -m site --user-site"
 RUN pip install --user PyYAML rsa urllib3
 #RUN pip install --user numpy scipy pandas gensim scikit-learn
+
+RUN rustup default stable
 
 RUN git clone https://github.com/peristrophe/dotfiles.git
 WORKDIR /home/${username}/dotfiles

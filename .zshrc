@@ -82,6 +82,7 @@ case $(uname) in
             dircolors -b ~/.colorrc > /tmp/ls_colors
             source /tmp/ls_colors
         fi
+        export LANG=ja_JP.UTF-8
 
         alias cd='gitcd'
         alias ..='cd ..'
