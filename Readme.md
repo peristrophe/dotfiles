@@ -2,6 +2,7 @@
 
 ```
 $ cd
+$ https://github.com/peristrophe/dotfiles.git
 $ make deploy install
 ```
 
