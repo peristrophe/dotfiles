@@ -29,7 +29,7 @@ $ git clone https://github.com/powerline/fontpatcher.git
 
 # Build docker image for sandbox
 
-after `make deploy`
+after `make deploy` in `dotfiles` directory.
 
 ```
 $ cd
