@@ -17,10 +17,17 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN sed -i '1iServer = '${aur2} /etc/pacman.d/mirrorlist
 RUN sed -i '1iServer = '${aur1} /etc/pacman.d/mirrorlist
 RUN pacman -Syy
-RUN pacman -S --noconfirm zsh vim git make
+RUN pacman -S --noconfirm gcc zsh vim git make sudo
 RUN pacman -S --noconfirm bluez bluez-libs
 RUN pacman -S --noconfirm python3 python-pip
 RUN pacman -S --noconfirm go
+
+RUN pacman -S --noconfirm rust rust-docs rustup cargo
+RUN rustup install stable
+RUN rustup default stable
+
+RUN echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel_group
+RUN which zsh | xargs -I{} chsh -s {}
 
 RUN git clone https://github.com/peristrophe/dotfiles.git
 WORKDIR /root/dotfiles

@@ -75,6 +75,7 @@ case $(uname) in
         alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
         alias history='history -E 1'
         alias relogin='exec $SHELL -l'
+        alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path, indent=2)"'
         ;;
     "Linux")
         if [ -f "$(which dircolors)" -a -f ~/.colorrc ]; then
@@ -90,6 +91,7 @@ case $(uname) in
         alias view='vim -R'
         alias history='history -E 1'
         alias relogin='exec $SHELL -l'
+        alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path, indent=2)"'
         ;;
     *)
         ;;
