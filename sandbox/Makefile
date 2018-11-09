@@ -4,6 +4,7 @@ TAG       := dev
 HOST      := my-sandbox
 CONTAINER := $(REPOS)_$(TAG)
 USERNAME  := app
+VOLUMEDIR := Projects
 
 .PHONY: build active deactive attach start stop clean cleani cleanc cleant
 
@@ -11,6 +12,10 @@ build:
 	docker build --build-arg username=$(USERNAME) --squash -t $(REPOS):$(TAG) $(HERE)
 	docker image prune -f
 
+prepare:
+ifeq (,$(shell find $(HOME) -maxdepth 1 -type d -name $(VOLUMEDIR)))
+	mkdir $(HOME)/$(VOLUMEDIR)
+endif
 #construct:
 #	docker run --restart=always --name=$(CONTAINER) -d -u root $(REPOS):$(TAG)
 #
@@ -30,9 +35,9 @@ build:
 #stop:
 #	docker stop $(CONTAINER)
 
-enter:
+enter: prepare
 	docker run --rm -it -u $(USERNAME) -h $(HOST) \
-		-v $(HOME)/Projects:/home/$(USERNAME)/Projects \
+		-v $(HOME)/$(VOLUMEDIR):/home/$(USERNAME)/$(VOLUMEDIR) \
 		$(REPOS):$(TAG) $(shell docker run --rm -it $(REPOS):$(TAG) which zsh)
 
 clean: cleanc cleani

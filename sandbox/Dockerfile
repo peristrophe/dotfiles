@@ -46,7 +46,6 @@ RUN which zsh | xargs -I{} useradd ${username} -m -G wheel -p ${username} -s {}
 
 USER ${username}
 WORKDIR /home/${username}
-RUN mkdir Projects
 
 #### show installed location: "python -m site --user-site"
 RUN pip install --user PyYAML rsa urllib3

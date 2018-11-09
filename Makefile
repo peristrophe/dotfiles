@@ -11,6 +11,7 @@ all:
 
 list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
+	@$(foreach val, $(DEPTHS), /bin/ls -dF $(val);)
 
 deploy:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
