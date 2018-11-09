@@ -18,6 +18,9 @@ deploy:
 
 install:
 	@$(foreach val, $(BREWFILES), brew bundle --file=$(val);)
+	@mkdir $(PWD)/.vim/bundle
+	@git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vundle.vim
+	@vim +PluginInstall +qall
 
 clean:
 	@echo 'Remove dot files in your home directory...'

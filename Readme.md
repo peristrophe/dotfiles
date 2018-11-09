@@ -1,14 +1,8 @@
 # Installation
 
 ```
-$ make deploy
-$ make install
-```
-
-# Homebrew
-
-```
-$ brew bundle
+$ cd
+$ make deploy install
 ```
 
 # About Resources
