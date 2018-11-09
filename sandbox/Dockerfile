@@ -27,7 +27,7 @@ RUN rustup install stable
 RUN rustup default stable
 
 RUN pacman -S --noconfirm elixir
-RUN ln -sf "$(find /usr -type f -name 'elixir')" /usr/bin/elixir
+RUN ln -sf "$(find /usr -type f -name 'elixir' | head -n 1)" /usr/bin/elixir
 
 RUN echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel_group
 RUN which zsh | xargs -I{} chsh -s {}
