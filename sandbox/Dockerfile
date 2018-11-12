@@ -62,4 +62,4 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vun
 RUN vim +PluginInstall +qall
 WORKDIR /home/${username}
 
-#CMD watch -n 60 date
+#ENTRYPOINT ["zsh", "-c"]
