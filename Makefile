@@ -5,10 +5,6 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 BREWFILES  := $(wildcard Brewfile*)
 DEPTHS     := ./sandbox/Makefile
 
-.DEFAULT_GOAL := help
-
-all:
-
 list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 	@$(foreach val, $(DEPTHS), /bin/ls -dF $(val);)
