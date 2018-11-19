@@ -17,10 +17,16 @@ deploy:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 	@$(foreach val, $(DEPTHS), ln -sfnv $(abspath $(val)) $(HOME)/$(notdir $(val))) 
 
-install:
+prepare:
+ifeq (,$(shell which brew))
+	xcode-select --install
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+endif
+
+install: prepare
 	@$(foreach val, $(BREWFILES), brew bundle --file=$(val);)
 	@mkdir $(PWD)/.vim/bundle
-	@git clone https://github.com/VundleVim/Vundle.vim.git ${PWD}/.vim/bundle/Vundle.vim
+	@git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim
 	@vim +PluginInstall +qall
 
 clean:
