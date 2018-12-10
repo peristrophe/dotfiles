@@ -58,6 +58,14 @@ if [ -d ~/.nodebrew ]; then
     export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
+# settings for android studio
+if [ -d ~/Library/Android/sdk ]; then
+    export ANDROID_HOME="$HOME/Library/Android/sdk"
+    export PATH="$PATH:$ANDROID_HOME/tools"
+    export PATH="$PATH:$ANDROID_HOME/tools/bin"
+    export PATH="$PATH:$ANDROID_HOME/platform-tools"
+fi
+
 export PATH="$HOME/dotfiles/bin:$PATH"
 
 case $(uname) in
@@ -75,7 +83,7 @@ case $(uname) in
         alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
         alias history='history -E 1'
         alias relogin='exec $SHELL -l'
-        alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path, indent=2)"'
+        alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path[1:], indent=2)"'
         ;;
     "Linux")
         if [ -f "$(which dircolors)" -a -f ~/.colorrc ]; then
@@ -92,7 +100,7 @@ case $(uname) in
         alias view='vim -R'
         alias history='history -E 1'
         alias relogin='exec $SHELL -l'
-        alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path, indent=2)"'
+        alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path[1:], indent=2)"'
         ;;
     *)
         ;;

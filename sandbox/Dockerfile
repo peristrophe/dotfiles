@@ -48,7 +48,7 @@ USER ${username}
 WORKDIR /home/${username}
 
 #### show installed location: "python -m site --user-site"
-RUN pip install --user PyYAML rsa urllib3
+RUN pip install --user PyYAML rsa urllib3 aiohttp
 #RUN pip install --user numpy scipy pandas gensim scikit-learn
 
 RUN rustup default stable
