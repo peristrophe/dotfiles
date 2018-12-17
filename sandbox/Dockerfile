@@ -1,4 +1,4 @@
-FROM base/archlinux:2018.11.01
+FROM base/archlinux:2018.12.01
 
 WORKDIR /root
 
@@ -21,6 +21,8 @@ RUN pacman -S --noconfirm gcc zsh vim git make sudo
 RUN pacman -S --noconfirm bluez bluez-libs
 RUN pacman -S --noconfirm python3 python-pip
 RUN pacman -S --noconfirm go
+
+RUN pip install pipenv
 
 RUN pacman -S --noconfirm rust rust-docs rustup cargo
 RUN rustup install stable
@@ -48,7 +50,7 @@ USER ${username}
 WORKDIR /home/${username}
 
 #### show installed location: "python -m site --user-site"
-RUN pip install --user PyYAML rsa urllib3 aiohttp
+#RUN pip install --user PyYAML rsa urllib3 aiohttp
 #RUN pip install --user numpy scipy pandas gensim scikit-learn
 
 RUN rustup default stable
