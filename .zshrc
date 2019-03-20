@@ -72,12 +72,14 @@ if [ -d ~/Library/Android/sdk ]; then
 fi
 
 export PATH="$HOME/dotfiles/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 case $(uname) in
     "Darwin")
         # ref: https://yoheikoga.github.io/2016/07/19/change-ls-background-color/
         export LSCOLORS='Exfxcxdxbxegedabagacad'
         export LANG=ja_JP.UTF-8
+        export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
         alias cd='gitcd'
         alias ..='cd ..'
