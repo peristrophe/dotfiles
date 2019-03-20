@@ -58,6 +58,11 @@ if [ -d ~/.nodebrew ]; then
     export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
+# settings for rust
+if [ -d ~/.cargo ]; then
+    source $HOME/.cargo/env
+fi
+
 # settings for android studio
 if [ -d ~/Library/Android/sdk ]; then
     export ANDROID_HOME="$HOME/Library/Android/sdk"

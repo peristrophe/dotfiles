@@ -40,6 +40,11 @@ enter: prepare
 		-v $(HOME)/$(VOLUMEDIR):/home/$(USERNAME)/$(VOLUMEDIR) \
 		$(REPOS):$(TAG) $(shell docker run --rm -it $(REPOS):$(TAG) which zsh)
 
+admin: prepare
+	docker run --rm -it -u root -w /root -h $(HOST) \
+		-v $(HOME)/$(VOLUMEDIR):/root/$(VOLUMEDIR) \
+		$(REPOS):$(TAG) $(shell docker run --rm -it $(REPOS):$(TAG) which zsh)
+
 clean: cleanc cleani
 
 cleani:
