@@ -26,12 +26,6 @@ esac
 # for vim-lightline
 export TERM=xterm-256color
 
-export HISTFILE=${HOME}/.zsh_history
-export HISTSIZE=1000
-export SAVEHIST=100000
-setopt hist_ignore_dups
-setopt EXTENDED_HISTORY
-
 # settings for pyenv
 if [ -d ~/.pyenv ]; then
     export PYENV_ROOT="$HOME/.pyenv"
@@ -115,9 +109,6 @@ case $(uname) in
     *)
         ;;
 esac
-
-[ -f ~/.zsh.secure ] && . ~/.zsh.secure
-[ ! -n "${SHELL}" ] && export SHELL=$(which zsh)
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
