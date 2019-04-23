@@ -55,13 +55,10 @@ set smartcase
 set showmatch
 set matchtime=1
 set expandtab
-<<<<<<< HEAD
 set tabstop=4
 set shiftwidth=4
-=======
 "set tabstop=4
 "set shiftwidth=4
->>>>>>> 0b5050a707550d427e894525ef907a3586fa9407
 set nosmarttab
 set noautoindent
 set nosmartindent
