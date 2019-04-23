@@ -140,21 +140,11 @@ module.exports = {
 
     hyperline: {
       plugins: [
-        {
-          name: 'network',
-          options: {
-            color: 'lightCyan'
-          }
-        },
-        {
-          name: 'battery',
-          options: {
-            colors: {
-              fine: 'lightGreen',
-              critical: 'lightRed'
-            }
-          }
-        }
+	"cpu",
+	"memory",
+	"network",
+	"battery",
+        "ip",
       ]
     },
 
@@ -168,7 +158,7 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
     'hyper-statusline',
-    //'hyperline#0.6.1',
+    //'hyperline',
     'hyperlinks',
     'hyperterm-material',
   ],
@@ -177,7 +167,7 @@ module.exports = {
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
   localPlugins: [
-    //'hyperline',
+    'hyperline',
   ],
 
   keymaps: {
