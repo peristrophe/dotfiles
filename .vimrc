@@ -54,9 +54,9 @@ set showcmd
 set smartcase
 set showmatch
 set matchtime=1
-set noexpandtab
-"set tabstop=4
-"set shiftwidth=4
+set expandtab
+set tabstop=4
+set shiftwidth=4
 set nosmarttab
 set noautoindent
 set nosmartindent
