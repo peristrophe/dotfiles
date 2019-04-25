@@ -62,7 +62,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '0px 0px 0px 2px',
+    padding: '0px 0px 24px 2px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -126,7 +126,7 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
 
     // specify terminal size
-    windowSize: [960, 498],
+    windowSize: [960, 540],
 
     // UI font family
     //uiFontFamily: '"NasuM for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
@@ -135,16 +135,17 @@ module.exports = {
     hyperStatusLine: {
       //dirtyColor: 'salmon',
       //aheadColor: 'ivory',
-      footerTransparent: true,
+      footerTransparent: false,
     },
 
     hyperline: {
       plugins: [
-	"cpu",
-	"memory",
-	"network",
-	"battery",
+        "hostname",
         "ip",
+        "cpu",
+        "memory",
+        "network",
+        "battery",
       ]
     },
 
@@ -157,8 +158,8 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    'hyper-statusline',
-    //'hyperline',
+    //'hyper-statusline',
+    'hyperline',
     'hyperlinks',
     'hyperterm-material',
   ],
@@ -166,9 +167,9 @@ module.exports = {
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: [
-    'hyperline',
-  ],
+  //localPlugins: [
+  //  'hyperline',
+  //],
 
   keymaps: {
     // Example
