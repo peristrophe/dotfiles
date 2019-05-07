@@ -3,16 +3,16 @@
 here=$(cd $(dirname $0); pwd)
 . ${here}/settings.sh
 
-#if [ ! -d "${GITDIR}/fonts" ];
-#then
-#    git clone https://github.com/powerline/fonts.git ${GITDIR}/fonts
-#fi
+PRJDIR="${GITDIR}/fontpatcher"
 
-if [ ! -d "${GITDIR}/fontpatcher" ];
-then
-    git clone https://github.com/powerline/fontpatcher.git ${GITDIR}/fontpatcher
-    git checkout c3488091611757cb02014ed7ed2f11be0208da83
-fi
+[ ! -e /usr/local/opt/readline/lib/libreadline.7.dylib ] && \
+    ln -s /usr/local/opt/readline/lib/libreadline.dylib /usr/local/opt/readline/lib/libreadline.7.dylib 
+
+[ ! -e /usr/local/opt/readline/lib/libhistory.7.dylib ] && \
+    ln -s /usr/local/opt/readline/lib/libhistory.dylib /usr/local/opt/readline/lib/libhistory.7.dylib
+
+[ -d "${PRJDIR}" ] && rm -rf "${PRJDIR}"
+git clone https://github.com/powerline/fontpatcher.git ${PRJDIR}
 
 [ -f ~/Downloads/NasuFonts.zip ] && rm -f ~/Downloads/NasuFonts.zip
 [ -d ~/Downloads/NasuFonts ] && rm -rf ~/Downloads/NasuFonts
@@ -30,8 +30,10 @@ fi
 mkdir -p ~/Downloads/NasuFonts
 unzip -j ~/Downloads/NasuFonts.zip "*.ttf" -d ~/Downloads/NasuFonts
 
-cp "${BINDIR}/powerline-fontpatcher-for-NasuM.py" "${GITDIR}/fontpatcher/scripts/"
-cd "${GITDIR}/fontpatcher/scripts"
-fontforge -lang=py -script "${GITDIR}/fontpatcher/scripts/powerline-fontpatcher-for-NasuM.py" ~/Downloads/NasuFonts/NasuM-*.ttf
+cd "${PRJDIR}/scripts"
+fontforge -lang=py \
+    -script "${BINDIR}/powerline-fontpatcher-for-NasuM.py" \
+    --source-font "${PRJDIR}/fonts/powerline-symbols.sfd" \
+    ~/Downloads/NasuFonts/NasuM-*.ttf
 
-cp ${GITDIR}/fontpatcher/scripts/NasuM-*.ttf ~/Library/Fonts/
+find "${PRJDIR}/scripts" -type f -name 'NasuM*.ttf' | xargs -I{} -L1 mv {} ~/Library/Fonts/

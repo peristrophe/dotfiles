@@ -85,7 +85,7 @@ def patch_one_font(source_font, target_font, rename_font=True):
 	print('X RATIO: {0}'.format(x_ratio))
 	print('Y RATIO: {0}'.format(y_ratio))
 	x_ratio = 1.0
-	y_ratio = 1.0
+	y_ratio = 0.96
 	scale = psMat.scale(x_ratio, y_ratio)
 
 	# Find source and target midpoints for translating
