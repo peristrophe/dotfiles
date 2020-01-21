@@ -1,6 +1,6 @@
 HERE      := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 REPOS     := sandbox
-TAG       := dev
+TAG       := pg
 HOST      := my-sandbox
 CONTAINER := $(REPOS)_$(TAG)
 USERNAME  := app
