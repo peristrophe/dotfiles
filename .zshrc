@@ -7,10 +7,10 @@ case "$TERM_PROGRAM" in
         PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
         add-zsh-hook precmd tmux-refresh
         ;;
-    'Hyper')
-        PROMPT="%B%K{148}%F{22} %n %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
-        #[ $(which tmux) ] && exec $(which tmux)
-        ;;
+    #'Hyper')
+    #    PROMPT="%B%K{148}%F{22} %n %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
+    #    #[ $(which tmux) ] && exec $(which tmux)
+    #    ;;
     *)
         if [ "$(whoami)" = "root" ]; then
             PROMPT="%F{red}%B%n%b@%F{magenta}%B%m%b:%F{blue}%B%c%b%# %f"
@@ -20,15 +20,15 @@ case "$TERM_PROGRAM" in
         ;;
 esac
 
-autoload -Uz vcs_info
-setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}[ %b ]%f"
-zstyle ':vcs_info:*' actionformats '[ %b|%a ]'
-precmd () { vcs_info }
-RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+#autoload -Uz vcs_info
+#setopt prompt_subst
+#zstyle ':vcs_info:git:*' check-for-changes true
+#zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+#zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+#zstyle ':vcs_info:*' formats "%F{green}[ %b ]%f"
+#zstyle ':vcs_info:*' actionformats '[ %b|%a ]'
+#precmd () { vcs_info }
+#RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # for vim-lightline
 export TERM=xterm-256color
@@ -60,7 +60,9 @@ fi
 
 # settings for jvm
 if [ -f /usr/libexec/java_home ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    #export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    #export JAVA_HOME=$(/usr/libexec/java_home)
+    export JAVA_HOME='/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home'
 fi
 
 # settings for nodebrew
@@ -79,6 +81,11 @@ if [ -d ~/Library/Android/sdk ]; then
     export PATH="$PATH:$ANDROID_HOME/tools"
     export PATH="$PATH:$ANDROID_HOME/tools/bin"
     export PATH="$PATH:$ANDROID_HOME/platform-tools"
+fi
+
+# settings for android studio
+if [ -d ~/Projects/flutter ]; then
+    export PATH="$PATH:$HOME/Projects/flutter/bin"
 fi
 
 export PATH="$HOME/dotfiles/bin:$PATH"
