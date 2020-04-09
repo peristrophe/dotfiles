@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'posva/vim-vue'
 
 call vundle#end()
 filetype plugin indent on
@@ -46,6 +47,7 @@ nnoremap - <C-x>
 
 
 """"" Basic Settings
+set belloff=all
 set noswapfile
 set ruler
 set title
@@ -204,4 +206,25 @@ augroup vimrc
     autocmd FileType yaml setlocal indentexpr=
     autocmd FileType zimbu setlocal indentexpr=
     autocmd FileType zsh setlocal indentexpr=
+    autocmd FileType vue syntax sync fromstart
 augroup END
+
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction

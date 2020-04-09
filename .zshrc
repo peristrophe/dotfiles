@@ -88,6 +88,7 @@ if [ -d ~/Projects/flutter ]; then
     export PATH="$PATH:$HOME/Projects/flutter/bin"
 fi
 
+export GIT_EDITOR=$(which vim)
 export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
