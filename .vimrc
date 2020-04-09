@@ -209,6 +209,7 @@ augroup vimrc
     autocmd FileType vue syntax sync fromstart
 augroup END
 
+""""" ref: https://qiita.com/nabewata07/items/d92655485622aeb847a8
 let g:ft = ''
 function! NERDCommenter_before()
   if &ft == 'vue'
