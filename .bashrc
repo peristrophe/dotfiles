@@ -16,10 +16,19 @@ case "$TERM_PROGRAM" in
         ;;
     *)
         if [ "$(whoami)" = "root" ]; then
-            PS1="\[\e[1;33m\]\u@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\w% \[\e[m\]"
+            PS1="\[\e[1;31m\]\u@\[\e[m\]\[\e[1;33m\]\h:\[\e[m\]\[\e[1;32m\]\w% \[\e[m\]"
         else
             PS1="\[\e[1;33m\]\u@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\w$ \[\e[m\]"
         fi
+        #     m   reset
+        # 0;30m   Black
+        # 0;31m   Red
+        # 0;32m   Green
+        # 0;33m   Yellow
+        # 0;34m   Blue
+        # 0;35m   Purple
+        # 0;36m   Cyan
+        # 0;37m   White
         ;;
 esac
 
