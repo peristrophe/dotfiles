@@ -16,9 +16,9 @@ case "$TERM_PROGRAM" in
         ;;
     *)
         if [ "$(whoami)" = "root" ]; then
-            PROMPT="%F{red}%B%n%b@%F{magenta}%B%m%b:%F{blue}%B%c%b%# %f"
+            PS1="\[\e[1;33m\]\u@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\w% \[\e[m\]"
         else
-            PROMPT="%F{yellow}%B%n%b@%F{green}%B%m%b:%F{cyan}%B%c%b%# %f"
+            PS1="\[\e[1;33m\]\u@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\w$ \[\e[m\]"
         fi
         ;;
 esac
