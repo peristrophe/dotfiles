@@ -2,6 +2,7 @@
 autoload -Uz add-zsh-hook
 stty stop undef
 
+
 case "$TERM_PROGRAM" in
     'iTerm.app')
         PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
@@ -20,6 +21,7 @@ case "$TERM_PROGRAM" in
         ;;
 esac
 
+
 #autoload -Uz vcs_info
 #setopt prompt_subst
 #zstyle ':vcs_info:git:*' check-for-changes true
@@ -30,14 +32,19 @@ esac
 #precmd () { vcs_info }
 #RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
+
 # for vim-lightline
 export TERM=xterm-256color
+export PYTHONDONTWRITEBYTECODE=1
+export PYTEST_FLAGS=""
+
 
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
+
 
 # settings for pyenv
 if [ -d ~/.pyenv ]; then
@@ -46,17 +53,20 @@ if [ -d ~/.pyenv ]; then
     eval "$(pyenv init -)"
 fi
 
+
 # settings for rbenv
 if [ -d ~/.rbenv ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
 
+
 # settings for goenv
 if [ -d ~/.goenv ]; then
     export PATH="$HOME/.goenv/bin:$PATH"
     eval "$(goenv init -)"
 fi
+
 
 # settings for jvm
 if [ -f /usr/libexec/java_home ]; then
@@ -65,15 +75,18 @@ if [ -f /usr/libexec/java_home ]; then
     export JAVA_HOME='/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home'
 fi
 
+
 # settings for nodebrew
 if [ -d ~/.nodebrew ]; then
     export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
+
 # settings for rust
 if [ -d ~/.cargo ]; then
     source $HOME/.cargo/env
 fi
+
 
 # settings for android studio
 if [ -d ~/Library/Android/sdk ]; then
@@ -83,21 +96,29 @@ if [ -d ~/Library/Android/sdk ]; then
     export PATH="$PATH:$ANDROID_HOME/platform-tools"
 fi
 
+
 # settings for android studio
 if [ -d ~/Projects/flutter ]; then
     export PATH="$PATH:$HOME/Projects/flutter/bin"
 fi
 
+
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+
+
 export GIT_EDITOR=$(which vim)
 export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
 
 case $(uname) in
     "Darwin")
         # ref: https://yoheikoga.github.io/2016/07/19/change-ls-background-color/
         export LSCOLORS='Exfxcxdxbxegedabagacad'
         export LANG=ja_JP.UTF-8
-        export PATH="$HOME/Library/Python/3.7/bin:$PATH"
+        # export PATH="$HOME/Library/Python/3.7/bin:/usr/local/bin:$PATH"
 
         alias cd='gitcd'
         alias ..='cd ..'
@@ -105,7 +126,7 @@ case $(uname) in
         alias ll='ls -Gl'
         alias la='ls -GlA'
         alias view='vim -R'
-        alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
+        #alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
         alias history='history -E 1'
         alias relogin='exec $SHELL -l'
         alias pythonlibs='python -c "import sys, pprint; pprint.pprint(sys.path[1:], indent=2)"'
@@ -131,8 +152,10 @@ case $(uname) in
         ;;
 esac
 
+
 [ -f ~/.zsh.secure ] && . ~/.zsh.secure
 [ ! -n "${SHELL}" ] && export SHELL=$(which zsh)
+
 
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
@@ -150,6 +173,7 @@ function tdq() {
     fi
 }
 
+
 function urlEnc() {
     if [ -p /dev/stdin ]
     then
@@ -159,6 +183,7 @@ function urlEnc() {
     fi
 }
 
+
 function urlDec() {
     if [ -p /dev/stdin ]
     then
@@ -167,6 +192,7 @@ function urlDec() {
         echo $1 | nkf --url-input -W
     fi
 }
+
 
 function gitcd() {
     if [[ ! ${1} =~ ^/.* || ${1} =~ ^${HOME}.* ]]; then
@@ -196,12 +222,17 @@ function gitcd() {
     return
 }
 
+
 function tmux-refresh() {
     [ ! -z $TMUX ] && tmux refresh-client -S
 }
+
 
 function tmux-prepare() {
     tmux split-pane
     tmux split-pane -h
     #tmux select-layout main-horizontal
 }
+
+
+PATH="/usr/local/opt/make/libexec/gnubin:$PATH"

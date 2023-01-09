@@ -1,39 +1,29 @@
-PS1="\[\e[0;32m\]\u@\h:\W\\$\[\e[m\] "
-
 # ref: https://yoheikoga.github.io/2016/07/19/change-ls-background-color/
 export LSCOLORS='Exfxcxdxbxegedabagacad'
 
+
 stty stop undef
 
-case "$TERM_PROGRAM" in
-    'iTerm.app')
-        PROMPT="%B%K{148}%F{22} $(tmux display -p '#P') %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
-        add-zsh-hook precmd tmux-refresh
-        ;;
-    'Hyper')
-        PROMPT="%B%K{148}%F{22} %n %b%K{22}%F{148}%F{148} %c %F{22}%k%f "
-        #[ $(which tmux) ] && exec $(which tmux)
-        ;;
-    *)
-        if [ "$(whoami)" = "root" ]; then
-            PS1="\[\e[1;31m\]\u@\[\e[m\]\[\e[1;33m\]\h:\[\e[m\]\[\e[1;32m\]\w% \[\e[m\]"
-        else
-            PS1="\[\e[1;33m\]\u@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\w$ \[\e[m\]"
-        fi
-        #     m   reset
-        # 0;30m   Black
-        # 0;31m   Red
-        # 0;32m   Green
-        # 0;33m   Yellow
-        # 0;34m   Blue
-        # 0;35m   Purple
-        # 0;36m   Cyan
-        # 0;37m   White
-        ;;
-esac
+
+#     m   reset
+# 0;30m   Black
+# 0;31m   Red
+# 0;32m   Green
+# 0;33m   Yellow
+# 0;34m   Blue
+# 0;35m   Purple
+# 0;36m   Cyan
+# 0;37m   White
+if [ "$(whoami)" = "root" ]; then
+    PS1="\[\e[1;31m\]\u@\[\e[m\]\[\e[1;33m\]\h:\[\e[m\]\[\e[1;32m\]\w% \[\e[m\]"
+else
+    PS1="\[\e[1;33m\]\u@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\w$ \[\e[m\]"
+fi
+
 
 # for vim-lightline
 export TERM=xterm-256color
+
 
 # settings for pyenv
 if [ -d ~/.pyenv ]; then
@@ -42,11 +32,13 @@ if [ -d ~/.pyenv ]; then
     eval "$(pyenv init -)"
 fi
 
+
 # settings for rbenv
 if [ -d ~/.rbenv ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
+
 
 # settings for goenv
 if [ -d ~/.goenv ]; then
@@ -54,20 +46,24 @@ if [ -d ~/.goenv ]; then
     eval "$(goenv init -)"
 fi
 
+
 # settings for jvm
 if [ -f /usr/libexec/java_home ]; then
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 fi
+
 
 # settings for nodebrew
 if [ -d ~/.nodebrew ]; then
     export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
+
 # settings for rust
 if [ -d ~/.cargo ]; then
     source $HOME/.cargo/env
 fi
+
 
 # settings for android studio
 if [ -d ~/Library/Android/sdk ]; then
@@ -77,8 +73,10 @@ if [ -d ~/Library/Android/sdk ]; then
     export PATH="$PATH:$ANDROID_HOME/platform-tools"
 fi
 
+
 export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
 
 case $(uname) in
     "Darwin")
@@ -119,6 +117,7 @@ case $(uname) in
         ;;
 esac
 
+
 function tdq() {
     [ $# -lt 1 ] && echo 'too few arguments.' >&2 && return 1
     [ -f "${1}" ] && local queryfromfile=true || queryfromfile=false
@@ -135,6 +134,7 @@ function tdq() {
     fi
 }
 
+
 function urlEnc() {
     if [ -p /dev/stdin ]
     then
@@ -144,6 +144,7 @@ function urlEnc() {
     fi
 }
 
+
 function urlDec() {
     if [ -p /dev/stdin ]
     then
@@ -152,6 +153,7 @@ function urlDec() {
         echo $1 | nkf --url-input -W
     fi
 }
+
 
 function gitcd() {
     if [[ ! ${1} =~ ^/.* || ${1} =~ ^${HOME}.* ]]; then
@@ -181,9 +183,11 @@ function gitcd() {
     return
 }
 
+
 function tmux-refresh() {
     [ ! -z $TMUX ] && tmux refresh-client -S
 }
+
 
 function tmux-prepare() {
     tmux split-pane
