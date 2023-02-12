@@ -24,6 +24,7 @@ install: prepare
 	@mkdir $(PWD)/.vim/bundle
 	@git clone https://github.com/VundleVim/Vundle.vim.git $(PWD)/.vim/bundle/Vundle.vim
 	@vim +PluginInstall +qall
+	sh $(PWD)/setup/bin/install-terminal-font.sh hack-gen
 
 clean:
 	@echo 'Remove dot files in your home directory...'

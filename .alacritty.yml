@@ -31,7 +31,7 @@ shell:
 font:
   size: 14  # フォントサイズ
   normal:
-    family: 'HackGenNerd'
+    family: 'HackGen Console NF'
     style: Regular
 #  bold:
 #    family: 'IBM Plex Mono'
@@ -47,7 +47,7 @@ window:
   padding:
     x: 4
     y: 4
+  opacity: 0.9               # 背景を透過させる
 #  decorations: full         # ボーダーとタイトルバーを表示する
 #  startup_mode: Fullscreen  # フルスクリーンで起動する
 
-background_opacity: 0.95    # 背景を透過させる
