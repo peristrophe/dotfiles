@@ -161,7 +161,7 @@ module.exports = {
     //'hyper-statusline',
     'hyperline',
     'hyperlinks',
-    'hyperterm-material',
+    //'hyperterm-material',
   ],
 
   // in development, you can create a directory under

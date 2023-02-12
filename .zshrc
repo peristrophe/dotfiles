@@ -68,6 +68,11 @@ if [ -d ~/.nodebrew ]; then
     export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
 
+# settings for flutter
+if [ -d ~/sdk/flutter ]; then
+    export PATH="$HOME/sdk/flutter/bin:$PATH"
+fi
+
 # settings for rust
 if [ -d ~/.cargo ]; then
     source $HOME/.cargo/env
