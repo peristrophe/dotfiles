@@ -51,3 +51,6 @@ window:
 #  decorations: full         # ボーダーとタイトルバーを表示する
 #  startup_mode: Fullscreen  # フルスクリーンで起動する
 
+key_bindings:
+  - { key: Yen,                     chars: "\x5C"                        }
+
