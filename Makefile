@@ -16,7 +16,7 @@ deploy:
 prepare:
 ifeq (,$(shell which brew))
 	xcode-select --install
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+	/bin/bash -c "$(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 endif
 
 install: prepare
