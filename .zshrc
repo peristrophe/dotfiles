@@ -234,5 +234,8 @@ function tmux-prepare() {
     #tmux select-layout main-horizontal
 }
 
+if [ -f ~/.zshrc_biz ]; then
+    . ~/.zshrc_biz
+fi
 
 PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
