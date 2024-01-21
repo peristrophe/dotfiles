@@ -1,0 +1,21 @@
+[font]
+size = 14
+
+[font.normal]
+family = "HackGen Console NF"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = "\u005c"
+key = "¥"
+
+[shell]
+args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 4
+y = 4
