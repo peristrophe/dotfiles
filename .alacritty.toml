@@ -1,3 +1,8 @@
+# ref: https://alacritty.org/config-alacritty.html
+
+# [env]
+# HOGEHOGE = "hogehoge"
+
 [font]
 size = 14
 
@@ -15,6 +20,7 @@ program = "/bin/zsh"
 
 [window]
 opacity = 0.9
+dimensions = { columns = 140, lines = 40 }
 
 [window.padding]
 x = 4
