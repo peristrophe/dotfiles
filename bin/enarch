@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+DEC=false
+
+while getopts "d" opt
+do
+  case $opt in
+    d) DEC=true ;;
+    *) exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [ ! -e ${1} ]; then
+  echo "'${1}' not exist" >&2
+  exit 1
+fi
+
+if "${DEC}"; then
+  openssl enc -d -aes-256-cbc -in ${1} | tar zxv
+else
+  tar zcv ${1} | openssl enc -e -aes-256-cbc -out ${1}.enc
+fi
